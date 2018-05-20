@@ -5,9 +5,7 @@ runtime_config:
 env_variables:
   APP_ENV: "prod"
   APP_SECRET: "bla-bla-bla"
-  MYSQL_USER: root
-  MYSQL_PASSWORD: hello-cloud
-  MYSQL_DSN: mysql:dbname=hello-google-cloud;unix_socket=/cloudsql/opportune-geode-204614:asia-southeast1:hello-google-cloud
+  DATABASE_URL: "mysql:dbname=hello-google-cloud;unix_socket=/cloudsql/opportune-geode-204614:asia-southeast1:hello-google-cloud"
 beta_settings:
   # for Cloud SQL, set this value to the Cloud SQL connection name,
   # e.g. "project:region:cloudsql-instance"
