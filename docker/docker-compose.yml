@@ -1,0 +1,19 @@
+php:
+    image: php71-fpm:latest
+    volumes:
+        - ../:/var/www/hello-google-cloud
+    links:
+        - db
+db:
+    image: hello-google-cloud-mysql:latest
+    restart: always
+    environment:
+        MYSQL_ROOT_PASSWORD: develop
+    ports:
+        - "3306:3306"
+
+adminer:
+    image: adminer
+    restart: always
+    ports:
+        - "8080:8080"

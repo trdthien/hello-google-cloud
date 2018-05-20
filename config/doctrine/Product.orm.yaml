@@ -1,0 +1,11 @@
+Product:
+  type: entity
+  id:
+    id:
+      type: string
+      generator:
+        strategy: UUID
+  fields:
+    name:
+      type: string
+      length: 50
