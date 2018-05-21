@@ -1,3 +1,16 @@
+apache:
+    image: httpd:2.4
+    restart: always
+    volumes:
+        - ../:/var/www/hello-google-cloud
+        - ./httpd.conf:/usr/local/apache2/conf/httpd.conf
+        - /var/log:/var/log/apache2
+    environment:
+        - "APACHE_LOG_DIR=/var/log/apache2"
+    ports:
+        - "80:80"
+    links:
+        - php
 php:
     image: php71-fpm:latest
     volumes:
