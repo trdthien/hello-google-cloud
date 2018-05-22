@@ -7,6 +7,7 @@ runtime_config:
 env_variables:
   APP_ENV: "prod"
   APP_SECRET: "bla-bla-bla"
+  APP_DEBUG: true
   ## Set these environment variables according to your CloudSQL configuration.
   #DATABASE_URL: "mysql://root:hello-cloud@unix_socket=/cloudsql/opportune-geode-204614:asia-southeast1:hello-google-cloud/hello-google-cloud"
   DB_DATABASE: hello-google-cloud
