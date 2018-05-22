@@ -5,7 +5,7 @@ easy_admin:
             class: App\Entity\Product
             form:
                 fields:
-                    - { property: 'categories', label: 'Categories', type: 'easyadmin_autocomplete', type_options: { class: 'App\Entity\Category' } }
+                    - { property: 'categories', label: 'Categories', type: 'choice', type_options: { choices: {'1':'Male', '2':'Female'} } }
         Category:
             class: App\Entity\Category
         User:
