@@ -1,12 +1,19 @@
 runtime: php
 env: flex
+
 runtime_config:
   document_root: public
+
 env_variables:
   APP_ENV: "prod"
   APP_SECRET: "bla-bla-bla"
-  DATABASE_URL: "mysql:dbname=hello-google-cloud;unix_socket=/cloudsql/opportune-geode-204614:asia-southeast1:hello-google-cloud"
+  ## Set these environment variables according to your CloudSQL configuration.
+  DB_DATABASE: hello-google-cloud
+  DB_USERNAME: root
+  DB_PASSWORD: hello-cloud
+  DB_SOCKET: '/cloudsql/opportune-geode-204614:asia-southeast1:hello-google-cloud'
+
 beta_settings:
   # for Cloud SQL, set this value to the Cloud SQL connection name,
   # e.g. "project:region:cloudsql-instance"
-  cloud_sql_instances: "opportune-geode-204614:asia-southeast1:hello-google-cloud"
+  cloud_sql_instances: 'opportune-geode-204614:asia-southeast1:hello-google-cloud'
