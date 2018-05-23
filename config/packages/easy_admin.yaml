@@ -16,3 +16,7 @@ easy_admin:
             class: App\Entity\User
         Article:
             class: App\Entity\Article
+        Tag:
+            class: App\Entity\Tag
+        Image:
+            class: App\Entity\Image
