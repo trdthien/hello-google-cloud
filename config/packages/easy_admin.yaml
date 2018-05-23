@@ -5,7 +5,11 @@ easy_admin:
             class: App\Entity\Product
             form:
                 fields:
-                    - { property: 'categories', label: 'Categories', type: 'choice', type_options: { choices: {'1':'Male', '2':'Female'} } }
+                    - { property: 'name', label: 'Name' }
+                    - { property: 'description', label: 'Description' }
+                    - { property: 'categories', label: 'Categories', type: 'entity', type_options: { class: 'App\Entity\Category', multiple: true } }
+                    - { property: 'price', label: 'Price' }
+
         Category:
             class: App\Entity\Category
         User:

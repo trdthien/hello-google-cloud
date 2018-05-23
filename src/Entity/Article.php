@@ -181,39 +181,6 @@ class Article
     }
 
     /**
-     * Add comment.
-     *
-     * @param Comment $comment
-     */
-    public function addComment(Comment $comment)
-    {
-        $comment->setArticle($this);
-        if (!$this->comments->contains($comment)) {
-            $this->comments->add($comment);
-        }
-    }
-
-    /**
-     * Remove comment.
-     *
-     * @param \App\Entity\Comment $comment
-     */
-    public function removeComment(Comment $comment)
-    {
-        $this->comments->removeElement($comment);
-    }
-
-    /**
-     * Get comments.
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getComments()
-    {
-        return $this->comments;
-    }
-
-    /**
      * Set image.
      *
      * @param Image $image

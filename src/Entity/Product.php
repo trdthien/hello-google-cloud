@@ -23,7 +23,8 @@ class Product
     public $name;
 
     /**
-     * @ORM\Column(type="array")
+     * @var array
+     * @ORM\ManyToMany(targetEntity="App\Entity\Category", cascade={"persist"})
      */
     public $categories;
 
