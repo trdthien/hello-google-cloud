@@ -3,10 +3,18 @@ easy_admin:
         # List the entity class name you want to manage
         Product:
             class: App\Entity\Product
+            list:
+                fields:
+                    - id
+                    - name
+                    - { property: 'image', type: 'image', base_path: '%app.path.product_images%' }
+                    - description
+                    - categories
             form:
                 fields:
                     - { property: 'name', label: 'Name' }
                     - { property: 'description', label: 'Description' }
+                    - { property: 'imageFile', type: 'vich_image' }
                     - { property: 'categories', label: 'Categories', type: 'entity', type_options: { class: 'App\Entity\Category', multiple: true } }
                     - { property: 'price', label: 'Price' }
 
@@ -14,6 +22,11 @@ easy_admin:
             class: App\Entity\Category
         User:
             class: App\Entity\User
+            form:
+                fields:
+                    - username
+                    - email
+                    - { property: 'roles', type: 'choice', type_options: { multiple: true, choices: { 'USER': 'ROLE_USER', 'ADMIN': 'ROLE_ADMIN' } } }
         Article:
             class: App\Entity\Article
         Tag:
