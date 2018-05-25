@@ -10,9 +10,11 @@ easy_admin:
                     - { property: 'image', type: 'image', base_path: '%app.path.product_images%' }
                     - description
                     - categories
+                    - enabled
             form:
                 fields:
                     - { property: 'name', label: 'Name' }
+                    - { property: 'slug', label: 'Slug' }
                     - { property: 'description', label: 'Description' }
                     - { property: 'imageFile', type: 'vich_image' }
                     - { property: 'categories', label: 'Categories', type: 'entity', type_options: { class: 'App\Entity\Category', multiple: true } }
@@ -22,10 +24,22 @@ easy_admin:
             class: App\Entity\Category
         User:
             class: App\Entity\User
+            list:
+                fields:
+                    - id
+                    - username
+                    - email
+                    - firstName
+                    - lastName
+                    - lastLogin
+                    - roles
+                    - enabled
             form:
                 fields:
                     - username
                     - email
+                    - firstName
+                    - lastName
                     - { property: 'roles', type: 'choice', type_options: { multiple: true, choices: { 'USER': 'ROLE_USER', 'ADMIN': 'ROLE_ADMIN' } } }
         Article:
             class: App\Entity\Article
