@@ -30,6 +30,10 @@ doctrine:
             charset: utf8
             collate: utf8_unicode_ci
 
+        types:
+            localize_string: App\Type\LocalizeString
+
+
         #url: '%env(resolve:DATABASE_URL)%'
     orm:
         auto_generate_proxy_classes: '%kernel.debug%'

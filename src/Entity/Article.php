@@ -77,6 +77,8 @@ class Article
      */
     private $tags;
 
+    use EntityTimeStamp;
+
     /**
      * Constructor.
      */

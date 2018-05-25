@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="tag")
  * @ORM\Entity(repositoryClass="App\Repository\TagRepository")
+ * @ORM\HasLifecycleCallbacks
  */
 class Tag
 {
@@ -27,6 +28,8 @@ class Tag
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
+
+    use EntityTimeStamp;
 
     /**
      * Get id.

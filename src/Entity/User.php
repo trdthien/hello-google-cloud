@@ -8,9 +8,12 @@ use FOS\UserBundle\Model\User as BaseUser;
 /**
  * @ORM\Entity
  * @ORM\Table(name="user")
+ * @ORM\HasLifecycleCallbacks
  */
 class User extends BaseUser
 {
+    use EntityTimeStamp;
+
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id

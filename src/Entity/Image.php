@@ -11,6 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Table(name="image")
  * @ORM\Entity(repositoryClass="App\Repository\ImageRepository")
+ * @ORM\HasLifecycleCallbacks
  */
 class Image
 {
@@ -42,6 +43,18 @@ class Image
      * @var bool
      */
     private $deletedImage;
+
+    /**
+     * @ORM\Column(type="datetime")
+     * @var \DateTime
+     */
+    public $createdAt;
+
+    /**
+     * @ORM\Column(type="datetime")
+     * @var \DateTime
+     */
+    public $updatedAt;
 
     /**
      * Get id.

@@ -10,9 +10,12 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  * @ORM\Entity
  * @ORM\Table(name="product")
  * @Vich\Uploadable
+ * @ORM\HasLifecycleCallbacks
  */
 class Product
 {
+    use EntityTimeStamp;
+
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id
@@ -24,6 +27,11 @@ class Product
      * @ORM\Column(type="string", length=100)
      */
     public $name;
+
+    /**
+     * @ORM\Column(type="localize_string")
+     */
+    public $slug;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -54,10 +62,9 @@ class Product
     public $description;
 
     /**
-     * @ORM\Column(type="datetime")
-     * @var \DateTime
+     * @var bool
      */
-    public $updatedAt;
+    protected $enabled;
 
     /**
      * @return mixed
@@ -85,10 +92,13 @@ class Product
 
     /**
      * @param mixed $name
+     * @return $this
      */
-    public function setName($name): void
+    public function setName($name)
     {
         $this->name = $name;
+
+        return $this;
     }
 
     /**
@@ -101,10 +111,13 @@ class Product
 
     /**
      * @param mixed $categories
+     * @return $this
      */
-    public function setCategories($categories): void
+    public function setCategories($categories)
     {
         $this->categories = $categories;
+
+        return $this;
     }
 
     /**
@@ -117,10 +130,13 @@ class Product
 
     /**
      * @param mixed $price
+     * @return $this
      */
-    public function setPrice($price): void
+    public function setPrice($price)
     {
         $this->price = $price;
+
+        return $this;
     }
 
     /**
@@ -133,10 +149,13 @@ class Product
 
     /**
      * @param mixed $description
+     * @return $this
      */
-    public function setDescription($description): void
+    public function setDescription($description)
     {
         $this->description = $description;
+
+        return $this;
     }
 
     public function setImageFile(File $image = null)
@@ -157,13 +176,38 @@ class Product
         return $this->imageFile;
     }
 
+    /**
+     * @param $image
+     * @return $this
+     */
     public function setImage($image)
     {
         $this->image = $image;
+
+        return $this;
     }
 
     public function getImage()
     {
         return $this->image;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * @param mixed $slug
+     * @return $this
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
     }
 }

@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity
  * @ORM\Table(name="category")
+ * @ORM\HasLifecycleCallbacks
  */
 class Category
 {
@@ -26,6 +27,8 @@ class Category
      * @ORM\Column(type="text")
      */
     public $description;
+
+    use EntityTimeStamp;
 
     /**
      * @return mixed
