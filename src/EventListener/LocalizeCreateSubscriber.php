@@ -6,6 +6,7 @@ use Doctrine\Common\Annotations\AnnotationReader;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class LocalizeCreateSubscriber
@@ -13,6 +14,9 @@ use Symfony\Component\HttpFoundation\RequestStack;
  */
 class LocalizeCreateSubscriber implements EventSubscriber
 {
+    /**
+     * @var null|Request
+     */
     private $request;
 
     /**
@@ -24,29 +28,30 @@ class LocalizeCreateSubscriber implements EventSubscriber
         $this->request = $requestStack->getCurrentRequest();
     }
 
+    /**
+     * @return array
+     */
     public function getSubscribedEvents()
     {
-        return array(
-            'prePersist'
-        );
+        return ['prePersist'];
     }
 
+    /**
+     * @param LifecycleEventArgs $event
+     */
     public function prePersist(LifecycleEventArgs $event)
     {
         $entity = $event->getEntity();
-        $locale = $this->request->getLocale();
-
         $docReader = new AnnotationReader();
         $reflect = new \ReflectionClass($entity);
-
         $properties = $reflect->getProperties();
 
-        foreach ($properties as $property)
-        {
+        foreach ($properties as $property) {
             $propertyInfo = $docReader->getPropertyAnnotations($reflect->getProperty($property->getName()));
 
             if ($propertyType = reset($propertyInfo)) {
                 if (isset($propertyType->type) && $propertyType->type == 'localize_string') {
+                    $locale = $this->request->getLocale();
                     $getter = sprintf('get%s', ucfirst($property->getName()));
                     $setter = sprintf('set%s', ucfirst($property->getName()));
 

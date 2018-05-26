@@ -6,6 +6,7 @@ use Doctrine\Common\Annotations\AnnotationReader;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class LocalizeUpdateSubscriber
@@ -13,6 +14,9 @@ use Symfony\Component\HttpFoundation\RequestStack;
  */
 class LocalizeUpdateSubscriber implements EventSubscriber
 {
+    /**
+     * @var null|Request
+     */
     private $request;
 
     /**
@@ -24,19 +28,20 @@ class LocalizeUpdateSubscriber implements EventSubscriber
         $this->request = $requestStack->getCurrentRequest();
     }
 
+    /**
+     * @return array
+     */
     public function getSubscribedEvents()
     {
-        return array(
-            'preUpdate'
-        );
+        return ['preUpdate'];
     }
 
+    /**
+     * @param LifecycleEventArgs $event
+     */
     public function preUpdate(LifecycleEventArgs $event)
     {
         $entity = $event->getEntity();
-
-        $locale = $this->request->getLocale();
-
         $docReader = new AnnotationReader();
         $reflect = new \ReflectionClass($entity);
 
@@ -46,22 +51,16 @@ class LocalizeUpdateSubscriber implements EventSubscriber
             return;
         }
 
-        $properties = $reflect->getProperties();
-
-        foreach ($properties as $property)
-        {
+        foreach ($reflect->getProperties() as $property) {
             $propertyInfo = $docReader->getPropertyAnnotations($reflect->getProperty($property->getName()));
-
             if ($propertyType = reset($propertyInfo)) {
                 if (isset($propertyType->type) && $propertyType->type == 'localize_string') {
-
+                    $locale = $this->request->getLocale();
                     $changeByName = $changeSet[$property->getName()];
-
                     $oldValue = $changeByName[0];
                     $newValue = array_merge($oldValue, [$locale => $changeByName[1]]);
-
                     $setter = sprintf('set%s', ucfirst($property->getName()));
-
+                    // override entity localize value
                     call_user_func([$entity, $setter], $newValue);
                 }
             }
