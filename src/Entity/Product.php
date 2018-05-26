@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
@@ -24,7 +25,7 @@ class Product
     public $id;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="localize_string")
      */
     public $name;
 
@@ -57,14 +58,22 @@ class Product
     public $price;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="localize_string")
      */
     public $description;
 
     /**
-     * @var bool
+     * @ORM\Column(type="boolean", options={"default" : false}))
      */
     protected $enabled;
+
+    /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+        $this->categories = new ArrayCollection();
+    }
 
     /**
      * @return mixed
@@ -207,6 +216,25 @@ class Product
     public function setSlug($slug)
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getEnabled()
+    {
+        return $this->enabled;
+    }
+
+    /**
+     * @param boolean $enabled
+     * @return $this
+     */
+    public function setEnabled($enabled)
+    {
+        $this->enabled = $enabled;
 
         return $this;
     }

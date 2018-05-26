@@ -11,6 +11,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Category
 {
+    use EntityTimeStamp;
+
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id
@@ -19,16 +21,24 @@ class Category
     public $id;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="localize_string")
      */
     public $name;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="localize_string")
+     */
+    public $slug;
+
+    /**
+     * @ORM\Column(type="localize_string")
      */
     public $description;
 
-    use EntityTimeStamp;
+    /**
+     * @ORM\Column(type="boolean", options={"default" : false}))
+     */
+    protected $enabled;
 
     /**
      * @return mixed
@@ -40,10 +50,13 @@ class Category
 
     /**
      * @param mixed $id
+     * @return $this
      */
-    public function setId($id): void
+    public function setId($id)
     {
         $this->id = $id;
+
+        return $this;
     }
 
     /**
@@ -56,10 +69,13 @@ class Category
 
     /**
      * @param mixed $name
+     * @return $this
      */
-    public function setName($name): void
+    public function setName($name)
     {
         $this->name = $name;
+
+        return $this;
     }
 
     /**
@@ -72,10 +88,51 @@ class Category
 
     /**
      * @param mixed $description
+     * @return $this
      */
-    public function setDescription($description): void
+    public function setDescription($description)
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * @param mixed $slug
+     * @return $this
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getEnabled()
+    {
+        return $this->enabled;
+    }
+
+    /**
+     * @param boolean $enabled
+     * @return $this
+     */
+    public function setEnabled($enabled)
+    {
+        $this->enabled = $enabled;
+
+        return $this;
     }
 
     public function __toString()
