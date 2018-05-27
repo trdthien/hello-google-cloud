@@ -1,8 +1,10 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
-    locale: 'de'
+    locale: 'en'
     app.path.product_images: /uploads/images/products
+
+    env(UPLOAD_ROOT): '%kernel.project_dir%/public/uploads/images'
 
 services:
     # default configuration for services in *this* file
@@ -45,3 +47,8 @@ services:
         arguments: ['@request_stack']
         tags:
             - { name: doctrine.event_listener, event: postLoad }
+
+    Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler:
+        arguments:
+            - '%env(MYSQL_DSN)%'
+            - { db_table: sessions, db_username: '%database_user%', db_password: '%database_password%' }

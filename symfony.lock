@@ -80,8 +80,14 @@
     "egulias/email-validator": {
         "version": "2.1.4"
     },
+    "friendsofsymfony/ckeditor-bundle": {
+        "version": "1.0.0"
+    },
     "friendsofsymfony/user-bundle": {
         "version": "v2.1.2"
+    },
+    "google/appengine-php-sdk": {
+        "version": "1.9.30"
     },
     "jdorn/sql-formatter": {
         "version": "v1.2.17"
@@ -181,6 +187,9 @@
     },
     "symfony/event-dispatcher": {
         "version": "v4.0.9"
+    },
+    "symfony/expression-language": {
+        "version": "v4.0.10"
     },
     "symfony/filesystem": {
         "version": "v4.0.9"
@@ -334,6 +343,9 @@
     },
     "symfony/yaml": {
         "version": "v4.0.9"
+    },
+    "trdthien/easyadmin-bundle": {
+        "version": "dev-master"
     },
     "twig/extensions": {
         "version": "1.0",

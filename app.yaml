@@ -14,6 +14,9 @@ env_variables:
   DB_USERNAME: root
   DB_PASSWORD: hello-cloud
   DB_SOCKET: '/cloudsql/opportune-geode-204614:asia-southeast1:hello-google-cloud'
+  MYSQL_DSN: 'mysql:unix_socket=/cloudsql/opportune-geode-204614:asia-southeast1:hello-google-cloud;dbname=hello-google-cloud'
+  # cloud storage
+  UPLOAD_ROOT: 'gs://opportune-geode-204614.appspot.com/public/uploads/images'
 
 beta_settings:
   # for Cloud SQL, set this value to the Cloud SQL connection name,

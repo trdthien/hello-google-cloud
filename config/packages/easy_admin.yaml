@@ -6,22 +6,35 @@ easy_admin:
             list:
                 fields:
                     - id
-                    - name
+                    - { property: 'name', type: 'text' }
                     - { property: 'image', type: 'image', base_path: '%app.path.product_images%' }
-                    - description
-                    - categories
+                    - { property: 'description', type: 'text' }
+                    - { property: 'categories', type: 'array' }
                     - enabled
             form:
                 fields:
                     - { property: 'name', label: 'Name' }
                     - { property: 'slug', label: 'Slug' }
-                    - { property: 'description', label: 'Description' }
+                    - { property: 'description', label: 'Description', type: 'ckeditor' }
                     - { property: 'imageFile', type: 'vich_image' }
                     - { property: 'categories', label: 'Categories', type: 'entity', type_options: { class: 'App\Entity\Category', multiple: true } }
                     - { property: 'price', label: 'Price' }
+                    - { property: 'enabled', label: 'Enabled' }
 
         Category:
             class: App\Entity\Category
+            list:
+                fields:
+                    - id
+                    - { property: 'name', type: 'text' }
+                    - { property: 'description', type: 'text' }
+                    - enabled
+                    - createdAt
+            form:
+                fields:
+                    - { property: 'name' }
+                    - { property: 'description', type: 'ckeditor' }
+                    - enabled
         User:
             class: App\Entity\User
             list:
