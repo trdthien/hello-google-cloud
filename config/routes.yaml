@@ -4,3 +4,10 @@ index:
 
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+
+elfinder:
+     resource: "@FMElfinderBundle/Resources/config/routing.yml"
+
+cke_file_upload:
+    path: /admin/uploads/
+    defaults: { _controller: 'App\Controller\UploadController::index' }
